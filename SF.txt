@@ -86,7 +86,7 @@ do
 
 
 v = $(curl -G https://api.abuseipdb.com/api/v2/check --data-urlencode "ipAddress=118.25.6.39" -d maxAgeInDays=90 -d verbose  -H "Key:24e3e65211041dae64bfb027c01171d6abec513c2126e8b1980c3b7cf214ae5d3cb271f3dc5bce88" -H "Accept:application/json")
-var1= echo $v | jq '.data.abuseconfidencescore'
+var1= echo $v '.data.abuseconfidencescore'
 echo $var1
 if [ $var1 -ge 25 ]
 then 
