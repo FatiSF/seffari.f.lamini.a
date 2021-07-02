@@ -75,6 +75,17 @@ l'ajout des régles de blocage dans le pare-feu pour les adresses malvaillantes:
                  -  sudo iptables -A  FORWARD  -d 192.168.1.3 -j DROP( filtrer les paquets entrants).
                  
     remplacer "192.168.1.3" avec l'adresse de protocole internet que vous souhaitez bloquer.
-    
+ a='curl -G https://api.abuseipdb.com/api/v2/check \
+--data-urlencode "ipAddress=118.25.6.39"
+-d maxAgeInDays=90
+-d verbose
+-H "Key:24e3e65211041dae64bfb027c01171d6abec513c2126e8b1980c3b7cf214ae5d3cb271f3dc5bce88"
+-H "Accept:application/json" '
+if [[ $a -le 25]]; then
+echo "${IP}: $a"
+sudo iptables -A INPUT -s $IP -j DROP
+else 
+echo "$IP;$a;ok" 
+fi
 
                  
